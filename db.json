@@ -1,7 +1,7 @@
 {
   "tickets": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Create Login Page",
       "description": "Build login UI",
       "status": "todo",
@@ -9,7 +9,7 @@
       "assignee": "Anisha"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Navbar",
       "description": "Responsive Navbar",
       "status": "progress",
@@ -17,12 +17,29 @@
       "assignee": "Rahul"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Footer",
       "description": "Footer Section",
       "status": "done",
       "priority": "Low",
       "assignee": "Priya"
+    },
+    {
+      "title": "sleep",
+      "description": "vgcf ",
+      "assignee": "me",
+      "priority": "Low",
+      "status": "todo",
+      "id": "P_cJHoWNCSA"
+    },
+    {
+      "title": "acf",
+      "description": "cr",
+      "assignee": "scq",
+      "priority": "Low",
+      "status": "todo",
+      "id": "wl2qki0mfto"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

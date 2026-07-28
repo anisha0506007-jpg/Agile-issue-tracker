@@ -1,83 +1,51 @@
-import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+
 import { getTickets } from "../services/ticketServices";
 
+import Board from "../components/Board";
+import TicketModal from "../components/TicketModal";
 
 function Dashboard() {
-  const initialTickets = useLoaderData();
+
+  const initialData = useLoaderData();
 
   const { data: tickets = [] } = useQuery({
     queryKey: ["tickets"],
     queryFn: getTickets,
-    initialData: initialTickets,
+    initialData,
   });
 
-  const todoTickets = tickets.filter(
-    (ticket) => ticket.status === "todo"
-  );
-
-  const progressTickets = tickets.filter(
-    (ticket) => ticket.status === "progress"
-  );
-
-  const doneTickets = tickets.filter(
-    (ticket) => ticket.status === "done"
-  );
+  const [selectedTicket, setSelectedTicket] =
+    useState(null);
 
   return (
-    <div className="dashboard">
-      <h1 className="board-title">Agile Issue Tracker</h1>
+    <>
+      <div className="dashboard-header">
 
-      <div className="board">
-        <div className="column">
-          <h2>To Do ({todoTickets.length})</h2>
+        <h1>Agile Issue Tracker</h1>
 
-          {todoTickets.map((ticket) => (
-            <div className="ticket-card" key={ticket.id}>
-              <h3>{ticket.title}</h3>
-              <p>{ticket.description}</p>
+        <Link to="/create-ticket">
+          <button>+ New Ticket</button>
+        </Link>
 
-              <div className="ticket-info">
-                <span>👤 {ticket.assignee}</span>
-                <span>⚡ {ticket.priority}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="column">
-          <h2>In Progress ({progressTickets.length})</h2>
-
-          {progressTickets.map((ticket) => (
-            <div className="ticket-card" key={ticket.id}>
-              <h3>{ticket.title}</h3>
-              <p>{ticket.description}</p>
-
-              <div className="ticket-info">
-                <span>👤 {ticket.assignee}</span>
-                <span>⚡ {ticket.priority}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="column">
-          <h2>Done ({doneTickets.length})</h2>
-
-          {doneTickets.map((ticket) => (
-            <div className="ticket-card" key={ticket.id}>
-              <h3>{ticket.title}</h3>
-              <p>{ticket.description}</p>
-
-              <div className="ticket-info">
-                <span>👤 {ticket.assignee}</span>
-                <span>⚡ {ticket.priority}</span>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
-    </div>
+
+      <Board
+        tickets={tickets}
+        onTicketClick={setSelectedTicket}
+      />
+
+      {selectedTicket && (
+        <TicketModal
+          ticket={selectedTicket}
+          onClose={() =>
+            setSelectedTicket(null)
+          }
+        />
+      )}
+    </>
   );
 }
 
