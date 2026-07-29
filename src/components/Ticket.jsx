@@ -1,5 +1,8 @@
+import React from "react";
 
 function Ticket({ ticket, onClick, onMove }) {
+  console.log("Rendering Ticket:", ticket.title);
+
   return (
     <div className="ticket-card">
       <div
@@ -11,9 +14,7 @@ function Ticket({ ticket, onClick, onMove }) {
         <p>{ticket.description}</p>
 
         <div className="ticket-footer">
-          <span>
-            <strong>👤</strong> {ticket.assignee}
-          </span>
+          <span>👤 {ticket.assignee}</span>
 
           <span
             className={`priority ${ticket.priority.toLowerCase()}`}
@@ -25,25 +26,19 @@ function Ticket({ ticket, onClick, onMove }) {
 
       <div className="ticket-actions">
         {ticket.status !== "todo" && (
-          <button
-            onClick={() => onMove(ticket, "todo")}
-          >
+          <button onClick={() => onMove(ticket, "todo")}>
             ← To Do
           </button>
         )}
 
         {ticket.status !== "progress" && (
-          <button
-            onClick={() => onMove(ticket, "progress")}
-          >
+          <button onClick={() => onMove(ticket, "progress")}>
             In Progress
           </button>
         )}
 
         {ticket.status !== "done" && (
-          <button
-            onClick={() => onMove(ticket, "done")}
-          >
+          <button onClick={() => onMove(ticket, "done")}>
             Done →
           </button>
         )}
@@ -52,4 +47,4 @@ function Ticket({ ticket, onClick, onMove }) {
   );
 }
 
-export default Ticket;
+export default React.memo(Ticket);
