@@ -1,3 +1,4 @@
+import React from "react";
 import Ticket from "./Ticket";
 
 function Column({
@@ -6,6 +7,8 @@ function Column({
   onTicketClick,
   onMove,
 }) {
+  console.log(`Rendering Column: ${title}`);
+
   return (
     <div className="column">
       <div className="column-header">
@@ -19,7 +22,7 @@ function Column({
       <div className="column-body">
         {tickets.length === 0 ? (
           <p className="empty-column">
-            No tickets
+            No Tickets
           </p>
         ) : (
           tickets.map((ticket) => (
@@ -36,4 +39,4 @@ function Column({
   );
 }
 
-export default Column;
+export default React.memo(Column);

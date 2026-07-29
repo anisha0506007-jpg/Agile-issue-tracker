@@ -1,3 +1,4 @@
+import React from "react";
 import Column from "./Column";
 
 function Board({
@@ -5,6 +6,8 @@ function Board({
   onTicketClick,
   onMove,
 }) {
+  console.log("Rendering Board");
+
   const todo = tickets.filter(
     (ticket) => ticket.status === "todo"
   );
@@ -43,4 +46,4 @@ function Board({
   );
 }
 
-export default Board;
+export default React.memo(Board);

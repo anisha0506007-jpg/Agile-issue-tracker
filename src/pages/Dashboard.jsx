@@ -1,11 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-
+import {useQuery,useMutation,useQueryClient,} from "@tanstack/react-query";
 import { getTickets, updateTicket } from "../services/ticketServices";
 
 import Board from "../components/Board";
@@ -63,18 +58,27 @@ function Dashboard() {
     },
   });
 
-  const handleMove = (ticket, newStatus) => {
-    mutation.mutate({
-      ...ticket,
-      status: newStatus,
-    });
-  };
+  const handleMove = useCallback(
+    (ticket, newStatus) => {
+      mutation.mutate({
+        ...ticket,
+        status: newStatus,
+      });
+    },
+    [mutation]
+  );
+
+  const handleTicketClick = useCallback((ticket) => {
+    setSelectedTicket(ticket);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedTicket(null);
+  }, []);
 
   return (
     <div className="dashboard">
-
       <div className="dashboard-header">
-
         <h1>Agile Issue Tracker</h1>
 
         <Link to="/create-ticket">
@@ -82,24 +86,20 @@ function Dashboard() {
             + New Ticket
           </button>
         </Link>
-
       </div>
 
       <Board
         tickets={tickets}
-        onTicketClick={setSelectedTicket}
+        onTicketClick={handleTicketClick}
         onMove={handleMove}
       />
 
       {selectedTicket && (
         <TicketModal
           ticket={selectedTicket}
-          onClose={() =>
-            setSelectedTicket(null)
-          }
+          onClose={handleCloseModal}
         />
       )}
-
     </div>
   );
 }
