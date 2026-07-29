@@ -1,7 +1,15 @@
 import { useState, useCallback } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import {useQuery,useMutation,useQueryClient,} from "@tanstack/react-query";
-import { getTickets, updateTicket } from "../services/ticketServices";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+
+import {
+  getTickets,
+  updateTicket,
+} from "../services/ticketServices";
 
 import Board from "../components/Board";
 import TicketModal from "../components/TicketModal";
@@ -12,13 +20,19 @@ function Dashboard() {
 
   const initialTickets = useLoaderData();
 
-  const { data: tickets = [] } = useQuery({
+  const {
+    data: tickets = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["tickets"],
     queryFn: getTickets,
     initialData: initialTickets,
   });
 
-  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [selectedTicket, setSelectedTicket] =
+    useState(null);
 
   const mutation = useMutation({
     mutationFn: updateTicket,
@@ -44,7 +58,7 @@ function Dashboard() {
       return { previousTickets };
     },
 
-    onError: (error, updatedTicket, context) => {
+    onError: (err, updatedTicket, context) => {
       queryClient.setQueryData(
         ["tickets"],
         context.previousTickets
@@ -76,6 +90,23 @@ function Dashboard() {
     setSelectedTicket(null);
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <h2>Loading Tickets...</h2>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="error-container">
+        <h2>Something went wrong!</h2>
+        <p>{error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="dashboard">
       <div className="dashboard-header">
@@ -88,11 +119,22 @@ function Dashboard() {
         </Link>
       </div>
 
-      <Board
-        tickets={tickets}
-        onTicketClick={handleTicketClick}
-        onMove={handleMove}
-      />
+      {tickets.length === 0 ? (
+        <div className="empty-state">
+          <h2>No Tickets Found</h2>
+
+          <p>
+            Click on "New Ticket" to create your
+            first ticket.
+          </p>
+        </div>
+      ) : (
+        <Board
+          tickets={tickets}
+          onTicketClick={handleTicketClick}
+          onMove={handleMove}
+        />
+      )}
 
       {selectedTicket && (
         <TicketModal

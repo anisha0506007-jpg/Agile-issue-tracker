@@ -1,8 +1,6 @@
 import React from "react";
-
+import DeleteButton from "./DeleteButton";
 function Ticket({ ticket, onClick, onMove }) {
-  console.log("Rendering Ticket:", ticket.title);
-
   return (
     <div className="ticket-card">
       <div
@@ -42,6 +40,8 @@ function Ticket({ ticket, onClick, onMove }) {
             Done →
           </button>
         )}
+
+        <DeleteButton id={ticket.id} />
       </div>
     </div>
   );
