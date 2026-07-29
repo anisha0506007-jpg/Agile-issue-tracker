@@ -4,13 +4,13 @@ import { updateTicket } from "../services/ticketServices";
 
 function TicketModal({ ticket, onClose }) {
   const queryClient = useQueryClient();
-
   const [formData, setFormData] = useState(ticket);
-
   const titleRef = useRef(null);
-
   useEffect(() => {
-    titleRef.current.focus();
+    setFormData(ticket);
+  }, [ticket]);
+  useEffect(() => {
+    titleRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -22,8 +22,9 @@ function TicketModal({ ticket, onClose }) {
 
     window.addEventListener("keydown", handleEscape);
 
-    return () =>
+    return () => {
       window.removeEventListener("keydown", handleEscape);
+    };
   }, [onClose]);
 
   const mutation = useMutation({
@@ -36,13 +37,20 @@ function TicketModal({ ticket, onClose }) {
 
       onClose();
     },
+
+    onError: (error) => {
+      console.error("Failed to update ticket:", error);
+      alert("Failed to update ticket.");
+    },
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -52,37 +60,40 @@ function TicketModal({ ticket, onClose }) {
 
   return (
     <div className="modal-overlay">
-
       <div className="modal">
-
-        <button
-          className="close-btn"
-          onClick={onClose}
-        >
+        <button className="close-btn" onClick={onClose}>
           ×
         </button>
 
         <h2>Edit Ticket</h2>
 
         <form onSubmit={handleSubmit}>
-
           <input
             ref={titleRef}
+            type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
+            placeholder="Title"
+            required
           />
 
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
+            placeholder="Description"
+            rows="4"
+            required
           />
 
           <input
+            type="text"
             name="assignee"
             value={formData.assignee}
             onChange={handleChange}
+            placeholder="Assignee"
+            required
           />
 
           <select
@@ -90,9 +101,9 @@ function TicketModal({ ticket, onClose }) {
             value={formData.priority}
             onChange={handleChange}
           >
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
 
           <select
@@ -101,20 +112,15 @@ function TicketModal({ ticket, onClose }) {
             onChange={handleChange}
           >
             <option value="todo">To Do</option>
-            <option value="progress">
-              In Progress
-            </option>
+            <option value="progress">In Progress</option>
             <option value="done">Done</option>
           </select>
 
-          <button type="submit">
-            Save Changes
+          <button type="submit" disabled={mutation.isPending}>
+            {mutation.isPending ? "Saving..." : "Save Changes"}
           </button>
-
         </form>
-
       </div>
-
     </div>
   );
 }
