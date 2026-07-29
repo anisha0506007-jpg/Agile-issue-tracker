@@ -1,14 +1,6 @@
 {
   "tickets": [
     {
-      "id": "1",
-      "title": "Create Login Page",
-      "description": "Build login UI",
-      "status": "done",
-      "priority": "High",
-      "assignee": "Anisha"
-    },
-    {
       "id": "2",
       "title": "Navbar",
       "description": "Responsive Navbar",
@@ -37,7 +29,7 @@
       "description": "cr",
       "assignee": "scq",
       "priority": "Low",
-      "status": "todo",
+      "status": "done",
       "id": "wl2qki0mfto"
     }
   ],
