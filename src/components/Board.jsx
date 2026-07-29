@@ -1,6 +1,10 @@
 import Column from "./Column";
 
-function Board({ tickets, onTicketClick }) {
+function Board({
+  tickets,
+  onTicketClick,
+  onMove,
+}) {
   const todo = tickets.filter(
     (ticket) => ticket.status === "todo"
   );
@@ -19,18 +23,21 @@ function Board({ tickets, onTicketClick }) {
         title="To Do"
         tickets={todo}
         onTicketClick={onTicketClick}
+        onMove={onMove}
       />
 
       <Column
         title="In Progress"
         tickets={progress}
         onTicketClick={onTicketClick}
+        onMove={onMove}
       />
 
       <Column
         title="Done"
         tickets={done}
         onTicketClick={onTicketClick}
+        onMove={onMove}
       />
     </div>
   );
