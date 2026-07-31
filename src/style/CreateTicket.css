@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+
+.create-ticket{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:60px 20px;
+
+    background:
+        radial-gradient(circle at top left,#232946 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#4c1d95 0%,transparent 28%),
+        #0f172a;
+}
+
+
+.create-ticket form{
+
+    width:100%;
+    max-width:650px;
+
+    background:#1b2238;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.45);
+
+}
+
+
+.create-ticket h1{
+
+    color:#ffffff;
+
+    font-size:2.2rem;
+
+    margin-bottom:35px;
+
+    text-align:center;
+
+    font-weight:700;
+
+}
+
+
+.create-ticket input,
+.create-ticket textarea,
+.create-ticket select{
+
+    width:100%;
+
+    margin-bottom:20px;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    border:1px solid #38435f;
+
+    background:#252d46;
+
+    color:#fff;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.create-ticket input::placeholder,
+.create-ticket textarea::placeholder{
+
+    color:#94a3b8;
+
+}
+
+.create-ticket textarea{
+
+    resize:none;
+
+    min-height:140px;
+
+}
+
+.create-ticket input:focus,
+.create-ticket textarea:focus,
+.create-ticket select:focus{
+
+    border-color:#8b5cf6;
+
+    box-shadow:
+    0 0 0 3px rgba(139,92,246,.18);
+
+}
+
+.form-buttons{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    margin-top:25px;
+}
+
+
+.back-btn{
+    flex:1;
+    padding:14px;
+
+    background:#23233c;
+    color:#ffffff;
+
+    border:1px solid #3b3b5a;
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#2d2d4b;
+    transform:translateY(-2px);
+    border-color:#7c3aed;
+}
+
+
+.create-btn{
+    flex:2;
+
+    padding:14px;
+
+    background:linear-gradient(135deg,#7c3aed,#a855f7);
+    color:white;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 8px 20px rgba(124,58,237,.35);
+}
+
+.create-btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 14px 30px rgba(124,58,237,.45);
+
+    background:linear-gradient(135deg,#8b5cf6,#c026d3);
+}
+
+
+@media(max-width:768px){
+
+.create-ticket{
+
+padding:25px;
+
+}
+
+.create-ticket form{
+
+padding:25px;
+
+}
+
+.button-group{
+
+flex-direction:column;
+
+}
+
+}

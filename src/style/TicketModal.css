@@ -1,0 +1,211 @@
+
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(8,10,25,.78);
+    backdrop-filter:blur(8px);
+
+    z-index:1000;
+}
+
+
+.modal{
+
+    width:90%;
+    max-width:550px;
+
+    background:#1b1d33;
+
+    border:1px solid #34385f;
+    border-radius:18px;
+
+    padding:30px;
+
+    position:relative;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.55);
+
+    animation:popup .3s ease;
+}
+
+
+
+.modal h2{
+
+    color:#ffffff;
+
+    text-align:center;
+
+    margin-bottom:28px;
+
+    font-size:30px;
+    font-weight:700;
+}
+
+
+.close-btn{
+
+    position:absolute;
+
+    top:18px;
+    right:18px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#2a2e4c;
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.close-btn:hover{
+
+    background:#7c3aed;
+
+    transform:rotate(90deg);
+}
+
+
+
+.modal form{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:18px;
+}
+
+
+
+.modal input,
+.modal textarea,
+.modal select{
+
+    width:100%;
+
+    background:#252945;
+
+    color:#ffffff;
+
+    border:1px solid #3b4068;
+
+    border-radius:12px;
+
+    padding:14px 16px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    outline:none;
+}
+
+.modal textarea{
+
+    resize:none;
+
+    min-height:120px;
+}
+
+.modal input::placeholder,
+.modal textarea::placeholder{
+
+    color:#8d93b7;
+}
+
+.modal input:focus,
+.modal textarea:focus,
+.modal select:focus{
+
+    border-color:#8b5cf6;
+
+    box-shadow:
+        0 0 0 4px rgba(139,92,246,.18);
+}
+
+
+
+.modal button[type="submit"]{
+
+    margin-top:10px;
+
+    padding:15px;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    );
+
+    box-shadow:
+        0 12px 25px rgba(124,58,237,.35);
+
+    transition:.3s;
+}
+
+.modal button[type="submit"]:hover{
+
+    transform:translateY(-3px);
+
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #c026d3
+    );
+
+    box-shadow:
+        0 18px 35px rgba(124,58,237,.45);
+}
+
+.modal button[type="submit"]:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.6;
+
+    transform:none;
+
+    box-shadow:none;
+}
+
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
