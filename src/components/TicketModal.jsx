@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateTicket } from "../services/ticketServices";
-
+import "../style/TicketModal.css"
 function TicketModal({ ticket, onClose }) {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState(ticket);

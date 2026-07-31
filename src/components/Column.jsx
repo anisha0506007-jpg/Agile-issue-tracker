@@ -1,5 +1,6 @@
 import React from "react";
 import Ticket from "./Ticket";
+import "../style/Column.css";
 
 function Column({
   title,

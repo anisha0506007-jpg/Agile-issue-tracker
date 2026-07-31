@@ -4,17 +4,9 @@
       "id": "2",
       "title": "Navbar",
       "description": "Responsive Navbar",
-      "status": "progress",
-      "priority": "Medium",
-      "assignee": "Rahul"
-    },
-    {
-      "id": "3",
-      "title": "Footer",
-      "description": "Footer Section",
       "status": "done",
-      "priority": "Low",
-      "assignee": "Priya"
+      "priority": "Medium",
+      "assignee": "Anshul"
     },
     {
       "title": "sleep",
@@ -25,12 +17,12 @@
       "id": "P_cJHoWNCSA"
     },
     {
-      "title": "acf",
-      "description": "cr",
-      "assignee": "scq",
-      "priority": "Low",
-      "status": "done",
-      "id": "wl2qki0mfto"
+      "title": "js topics cover",
+      "description": "Revise milestone as well as practice\n",
+      "assignee": "Anisha",
+      "priority": "High",
+      "status": "todo",
+      "id": "q21vGWv8QCM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

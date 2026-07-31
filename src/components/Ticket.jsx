@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/Ticket.css"
 import DeleteButton from "./DeleteButton";
 function Ticket({ ticket, onClick, onMove }) {
   return (
